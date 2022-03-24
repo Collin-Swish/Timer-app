@@ -1,0 +1,48 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: auto;
+  max-width: 38rem;
+  padding: 2rem;
+  background-color: rgb(27, 26, 26);
+}
+
+#Watch{
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+  text-align: center;
+}
+
+#Watch h1{
+  color:white;
+}
+#counter{
+  border: darkgreen solid 4px;
+  color:lightgreen;
+  border-radius: 60px;
+  margin-top:30px;
+}
+#Watch #subtitle{
+  color:white;
+}
+
+
+#Watch button{
+  width:100px;
+  height: 30px;
+  font-size: 20px;
+}
+
+#Watch #counter{
+  font-size: 50px;
+}
+
+.takes{
+  margin: auto;
+  border:rgb(1, 51, 1) solid 4px;
+  border-radius: 20px;
+  background-color: darkgreen;
+  width: 100%;
+  height: 300px;
+}

@@ -1,14 +1,31 @@
 const fs = require("fs");
 var startTime;
 var interval;
+var Time = 1;
 
-// Converts Date objects to a { hour : minute : second } format
+// Converts number of seconds to an { hour : minute : second } format
 function timeToString(time){
-    // Full disclosure I copied this code from w3schools
-    var hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((time % (1000 * 60)) / 1000);
-    return `${hours} : ${minutes} : ${seconds}`
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    while(time >= 60){
+        minutes++;
+        time-=60;
+    }
+    seconds = time;
+    while(minutes >= 60){
+        hours++;
+        minutes-=60;
+    }
+    return `${padTime(hours)} : ${padTime(minutes)} : ${padTime(seconds)}`
+}
+
+// Adds a zero to the beginning of any number less than 10 for aesthetic reasons
+function padTime(time){
+    if(time < 10){
+        return `0${time}`;
+    }
+    else{return time}
 }
 
 
@@ -16,10 +33,10 @@ function timeToString(time){
 window.addEventListener("DOMContentLoaded",()=>{
     let start = document.querySelector("button")
     start.addEventListener("click",()=>{
-        startTime = Date.now();
         interval = setInterval(()=>{
-            updateCounter(timeToString(Date.now() - startTime));
-        });
+            updateCounter(timeToString(Time));
+            Time++
+        },1000);
     })
     document.querySelector("#stop").addEventListener("click",()=>{
         clearInterval(interval);
