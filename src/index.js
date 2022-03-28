@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require('electron');
+const { app, Menu, BrowserWindow, dialog } = require('electron');
 const path = require('path');
+const fs = require("fs");
 require('electron-reload')(__dirname);
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -13,17 +14,35 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences:{
-      preload: path.join(__dirname,'script.js')
+      preload: path.join(__dirname,'script.js'),
+      contextIsolation: false
     }
   });
+  
+  
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+  const menu = Menu.buildFromTemplate([
+    {
+      label:"File",
+      submenu:[
+        {
+          label:"save",
+          click(){
+            save(mainWindow);
+          },
+          accelerator: 'CmdOrCtrl+S'
+        }
+      ]
+    }
+  ])
+  
+  Menu.setApplicationMenu(menu);
 };
-console.log('hello world')
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -38,6 +57,8 @@ app.on('window-all-closed', () => {
   }
 });
 
+
+
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
@@ -48,3 +69,8 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+async function save(window){
+  let path = await dialog.showSaveDialog(window);
+  window.webContents.send('save',path)
+}

@@ -9,7 +9,7 @@ body {
 
 #Watch{
   margin: auto;
-  width: 60%;
+  width: 90%;
   padding: 10px;
   text-align: center;
 }
@@ -23,13 +23,13 @@ body {
   border-radius: 60px;
   margin-top:30px;
 }
-#Watch #subtitle{
+#subtitle{
   color:white;
 }
 
 
 #Watch button{
-  width:100px;
+  min-width: 100px;
   height: 30px;
   font-size: 20px;
 }
@@ -44,5 +44,23 @@ body {
   border-radius: 20px;
   background-color: darkgreen;
   width: 100%;
-  height: 300px;
+  min-height: 300px;
+}
+
+.nameInput{
+  margin-bottom:20px;
+  height: 30px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 25px;
+
+}
+.left{
+  float:left;
+  padding:20px;
+}
+.right{
+  
+  float:right;
+  padding:20px;
 }
